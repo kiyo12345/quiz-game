@@ -1,30 +1,14 @@
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f0f8ff;
-    padding: 2em;
-    text-align: center;
-  }
-  
-  .quiz-container {
-    background: #fff;
-    padding: 2em;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    display: inline-block;
-  }
-  
-  .options {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .options li {
-    margin: 1em 0;
+.options {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 常に4列にする */
+    gap: 10px;
+    justify-items: center;
   }
   
   .options button {
-    padding: 0.5em 1em;
+    padding: 10px 15px;
     font-size: 16px;
-    cursor: pointer;
+    width: 100%;
+    max-width: 100px;
   }
   
