@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>クイズゲーム</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="quiz-container"></div>
+
+  <!-- ポップアップ -->
+  <div id="popup" class="popup">
+    <div class="popup-content">
+      <p id="popup-message"></p> <!-- 解説文 -->
+      <img id="popup-image" src="" alt="解説画像" /> <!-- 画像 -->
+      <button onclick="closePopup()">閉じる</button> <!-- 閉じるボタン -->
+    </div>
+  </div>
+
+  <div id="fireworks-container"></div>
+  
+  <!-- JavaScript -->
+  <script src="quiz.js"></script>
+</body>
+</html>
