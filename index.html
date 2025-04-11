@@ -3,35 +3,122 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>クイズサイト</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>画像付きクイズ</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f0f8ff;
+      text-align: center;
+      padding: 2em;
+    }
+    .quiz-box {
+      background: #fff;
+      padding: 2em;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      max-width: 500px;
+      margin: auto;
+    }
+    .options button {
+      display: block;
+      margin: 1em auto;
+      padding: 0.5em 1.5em;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #result {
+      font-size: 18px;
+      margin-top: 1em;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      margin: 20px 0;
+    }
+  </style>
 </head>
 <body>
-  <div class="quiz-container">
-    <h1>簡単なクイズ</h1>
-    <p class="question">Q1: 富士山の高さは？</p>
-    <ul class="options">
-      <li><button onclick="checkAnswer(this)">1,234m</button></li>
-      <li><button onclick="checkAnswer(this)">3,776m</button></li>
-      <li><button onclick="checkAnswer(this)">2,019m</button></li>
-      <li><button onclick="checkAnswer(this)">4,321m</button></li>
-    </ul>
+  <div class="quiz-box">
+    <h1>画像付きクイズ</h1>
+    <p id="question">読み込み中...</p>
+    <img id="image" src="" alt="画像" />
+    <div class="options" id="options"></div>
     <p id="result"></p>
   </div>
 
   <script>
-    function checkAnswer(button) {
-      const correctAnswer = "3,776m";
-      const result = document.getElementById("result");
-
-      if (button.textContent === correctAnswer) {
-        result.textContent = "正解！🎉";
-        result.style.color = "green";
-      } else {
-        result.textContent = "不正解 😢";
-        result.style.color = "red";
+    const quiz = [
+      {
+        question: "金城はどれですか？",
+        image: "https://github.com/kiyo12345/quiz-game/blob/main/1E%E7%B7%A8%E9%9B%86%E5%BE%8C.jpg?raw=true",  // ここに画像のURLを指定
+        options: ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18", ],
+        answer: "4"
+      },
+      {
+        question: "金城はどれですか？",
+        image: "https://github.com/kiyo12345/quiz-game/blob/main/3E%E6%96%87%E5%8C%96%E7%A5%AD%E7%B7%A8%E9%9B%86%E5%BE%8C.jpg?raw=true",  // 画像URLを指定
+        options: ["1","2","3","4","5","6","7","8","9","10","11","12","13"],
+        answer: "13"
+      },
+      {
+        question: "金城はどれですか？",
+        image: "https://github.com/kiyo12345/quiz-game/blob/main/3E%E8%94%B5%E3%83%86%E3%82%A3%E3%83%BC%E7%B7%A8%E9%9B%86%E5%BE%8C%E3%80%8C.jpg?raw=true",  // 画像URLを指定
+        options: ["1","2","3","4","5","6","7","8","9","10","11","12","13","14"],
+        answer: "8"
       }
+    ];
+
+    let current = 0;
+    let score = 0;
+
+    const questionEl = document.getElementById("question");
+    const imageEl = document.getElementById("image");
+    const optionsEl = document.getElementById("options");
+    const resultEl = document.getElementById("result");
+
+    function showQuestion() {
+      const q = quiz[current];
+      questionEl.textContent = q.question;
+      imageEl.src = q.image;  // 画像をセット
+      optionsEl.innerHTML = "";
+      resultEl.textContent = "";
+
+      q.options.forEach(option => {
+        const btn = document.createElement("button");
+        btn.textContent = option;
+        btn.onclick = () => checkAnswer(option);
+        optionsEl.appendChild(btn);
+      });
     }
+
+    function checkAnswer(selected) {
+      if (selected === quiz[current].answer) {
+        score++;
+        resultEl.textContent = "正解！🎉";
+        resultEl.style.color = "green";
+      } else {
+        resultEl.textContent = "不正解 😢";
+        resultEl.style.color = "red";
+      }
+
+      setTimeout(() => {
+        current++;
+        if (current < quiz.length) {
+          showQuestion();
+        } else {
+          showResult();
+        }
+      }, 1000);
+    }
+
+    function showResult() {
+      questionEl.textContent = "クイズ終了！";
+      imageEl.style.display = "none";  // 最後に画像を非表示
+      optionsEl.innerHTML = "";
+      resultEl.innerHTML = `あなたのスコアは <strong>${score} / ${quiz.length}</strong> です 🎉`;
+    }
+
+    showQuestion();
   </script>
 </body>
 </html>
