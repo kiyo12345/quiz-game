@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>クイズサイト</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>簡単なクイズ</h1>
+    <p class="question">Q1: 富士山の高さは？</p>
+    <ul class="options">
+      <li><button onclick="checkAnswer(this)">1,234m</button></li>
+      <li><button onclick="checkAnswer(this)">3,776m</button></li>
+      <li><button onclick="checkAnswer(this)">2,019m</button></li>
+      <li><button onclick="checkAnswer(this)">4,321m</button></li>
+    </ul>
+    <p id="result"></p>
+  </div>
+
+  <script>
+    function checkAnswer(button) {
+      const correctAnswer = "3,776m";
+      const result = document.getElementById("result");
+
+      if (button.textContent === correctAnswer) {
+        result.textContent = "正解！🎉";
+        result.style.color = "green";
+      } else {
+        result.textContent = "不正解 😢";
+        result.style.color = "red";
+      }
+    }
+  </script>
+</body>
+</html>
